@@ -1,0 +1,23 @@
+# Environnement virtuel
+venv/
+
+# Données brutes (trop lourdes et potentiellement confidentielles)
+data/raw/
+
+# Fichiers Python temporaires
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Modèles sauvegardés (trop lourds)
+models/
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/

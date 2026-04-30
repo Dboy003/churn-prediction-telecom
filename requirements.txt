@@ -1,0 +1,13 @@
+pandas==2.3.3
+numpy==2.4.4
+scikit-learn==1.8.0
+xgboost==3.2.0
+shap==0.51.0
+streamlit==1.56.0
+matplotlib==3.10.9
+seaborn==0.13.2
+plotly==6.7.0
+imbalanced-learn
+fastapi==0.109.0
+uvicorn==0.46.0
+pydantic==2.13.3

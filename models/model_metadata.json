@@ -1,0 +1,43 @@
+{
+    "seuil_optimal": 0.3,
+    "features": [
+        "gender",
+        "SeniorCitizen",
+        "Partner",
+        "Dependents",
+        "tenure",
+        "PhoneService",
+        "MultipleLines",
+        "OnlineSecurity",
+        "OnlineBackup",
+        "DeviceProtection",
+        "TechSupport",
+        "StreamingTV",
+        "StreamingMovies",
+        "PaperlessBilling",
+        "MonthlyCharges",
+        "TotalCharges",
+        "Contract_One year",
+        "Contract_Two year",
+        "InternetService_Fiber optic",
+        "InternetService_No",
+        "PaymentMethod_Credit card (automatic)",
+        "PaymentMethod_Electronic check",
+        "PaymentMethod_Mailed check",
+        "charge_par_mois",
+        "nb_services",
+        "nouveau_client",
+        "client_moyen",
+        "client_fidele",
+        "charges_estimees",
+        "risque_depart",
+        "charge_par_service",
+        "client_isole"
+    ],
+    "performances": {
+        "recall": 0.816,
+        "precision": 0.484,
+        "f1_score": 0.608,
+        "auc": 0.825
+    }
+}

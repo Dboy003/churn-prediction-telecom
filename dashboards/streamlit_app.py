@@ -26,13 +26,13 @@ st.set_page_config(
 # =============================================================
 @st.cache_data
 def load_data():
-    return pd.read_csv('../data/processed/telco_churn_processed.csv')
+    return pd.read_csv('data/processed/telco_churn_processed.csv')
 
 @st.cache_resource
 def load_model():
-    with open('../models/xgb_churn_model.pkl', 'rb') as f:
+    with open('models/xgb_churn_model.pkl', 'rb') as f:
         model = pickle.load(f)
-    with open('../models/model_metadata.json', 'r') as f:
+    with open('models/model_metadata.json', 'r') as f:
         metadata = json.load(f)
     return model, metadata
 

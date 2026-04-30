@@ -10,6 +10,7 @@ import seaborn as sns
 import pickle
 import json
 import requests
+import shap
 
 # =============================================================
 # CONFIGURATION DE LA PAGE
@@ -245,6 +246,40 @@ elif page == "🔍 Prédiction Client":
         ax.legend()
         ax.set_title(f'Probabilité de Churn : {proba:.1%}')
         st.pyplot(fig)
+
+        # =============================================================
+        # EXPLICATION SHAP
+        # =============================================================
+        st.markdown("---")
+        st.subheader("🔍 Pourquoi cette prédiction ?")
+
+        # Calculer les valeurs SHAP
+        explainer = shap.TreeExplainer(model)
+        shap_values = explainer.shap_values(df_pred)
+
+        # Top 10 variables
+        shap_df = pd.DataFrame({
+            'Variable': features,
+            'Impact SHAP': shap_values[0],
+            'Valeur': df_pred.iloc[0].values
+        }).sort_values('Impact SHAP', key=abs, ascending=False).head(10)
+
+        # Graphique
+        fig2, ax2 = plt.subplots(figsize=(10, 5))
+        colors = ['#e74c3c' if v > 0 else '#2ecc71' 
+                  for v in shap_df['Impact SHAP']]
+        ax2.barh(shap_df['Variable'], shap_df['Impact SHAP'], color=colors)
+        ax2.set_xlabel('Impact (rouge = pousse vers churn, vert = protège)')
+        ax2.set_title('Explication de la prédiction', fontsize=14)
+        ax2.axvline(x=0, color='black', linewidth=0.8)
+        plt.tight_layout()
+        st.pyplot(fig2)
+
+        # Explication en texte
+        st.markdown("** Facteurs principaux :**")
+        for _, row in shap_df.head(5).iterrows():
+            direction = "🔴 pousse vers churn" if row['Impact SHAP'] > 0 else "🟢 protège du churn"
+            st.markdown(f"- **{row['Variable']}** = {row['Valeur']:.2f} → {direction}")
 
 # =============================================================
 # PAGE 3 : PERFORMANCE DU MODÈLE

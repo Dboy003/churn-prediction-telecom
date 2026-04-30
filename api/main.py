@@ -3,7 +3,7 @@
 # =============================================================
 
 from fastapi import FastAPI, HTTPException
-from schemas import ClientData, PredictionResponse
+from api.schemas import ClientData, PredictionResponse
 import pickle
 import json
 import numpy as np
@@ -24,10 +24,17 @@ app = FastAPI(
 # =============================================================
 print(" Chargement du modèle...")
 
-with open('../models/xgb_churn_model.pkl', 'rb') as f:
+import os
+
+# Chemin compatible local ET Docker
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MODEL_PATH = os.path.join(BASE_DIR, 'models', 'xgb_churn_model.pkl')
+METADATA_PATH = os.path.join(BASE_DIR, 'models', 'model_metadata.json')
+
+with open(MODEL_PATH, 'rb') as f:
     model = pickle.load(f)
 
-with open('../models/model_metadata.json', 'r') as f:
+with open(METADATA_PATH, 'r') as f:
     metadata = json.load(f)
 
 SEUIL = metadata['seuil_optimal']
